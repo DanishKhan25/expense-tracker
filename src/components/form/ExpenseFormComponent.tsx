@@ -2,34 +2,37 @@ import { useForm, FieldValues } from "react-hook-form";
 import DropDown from "../common/drop-down/DropDown";
 import Input from "../common/input/Input";
 import { useState } from "react";
-import Table from "../table/Table";
 import ExpenseList from "../expense-list/ExpenseList";
+import ExpenseFilter from "../expense-filter/ExpenseFilter";
 interface FormData {
   description: string;
   amount: number;
   category: string;
 }
 
-const ExpenseForm = () => {
-  const CATEGORY = ["", "Grocery", "Utilities", "Entertainment"];
+export const CATEGORIES = ["Groceries", "Utilities", "Entertainment"];
+const ExpenseFormComponent = () => {
   const INITIAL_EXPENSES = [
-    { id: 1, description: "Milk", amount: 10, category: "Grocery" },
-    { id: 2, description: "Orange", amount: 20, category: "Grocery" },
-    { id: 3, description: "Milk", amount: 10, category: "Grocery" },
-    { id: 4, description: "Milk", amount: 10, category: "Grocery" },
-    { id: 5, description: "Milk", amount: 10, category: "Grocery" },
+    { id: 1, description: "Milk", amount: 10, category: "Groceries" },
+    { id: 2, description: "Orange", amount: 20, category: "Utilities" },
+    { id: 3, description: "Milk", amount: 10, category: "Groceries" },
+    { id: 4, description: "Milk", amount: 10, category: "Utilities" },
+    { id: 5, description: "Milk", amount: 10, category: "Entertainment" },
   ];
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [expenses, setExpenses] = useState(INITIAL_EXPENSES);
 
   // const onSubmit = (data: FormData) => {
   //   setExpenses([...expense, data]);
   // };
-
+  const visibleExpenses = selectedCategory
+    ? expenses.filter((exp) => exp.category === selectedCategory)
+    : expenses;
   return (
     <div className="container">
       <form
@@ -66,7 +69,7 @@ const ExpenseForm = () => {
           <DropDown
             name="category"
             id="category"
-            list={CATEGORY}
+            list={CATEGORIES}
             label="Category"
             onChange={register("category", { required: true })}
           />
@@ -80,12 +83,17 @@ const ExpenseForm = () => {
           </button>
         </div>
       </form>
+      <div className="mb-3">
+        <ExpenseFilter
+          onSelectCategory={(category) => setSelectedCategory(category)}
+        />
+      </div>
       <ExpenseList
-        expenses={expenses}
+        expenses={visibleExpenses}
         onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
       />
     </div>
   );
 };
 
-export default ExpenseForm;
+export default ExpenseFormComponent;
