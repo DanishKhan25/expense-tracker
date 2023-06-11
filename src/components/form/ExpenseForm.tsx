@@ -3,6 +3,7 @@ import DropDown from "../common/drop-down/DropDown";
 import Input from "../common/input/Input";
 import { useState } from "react";
 import Table from "../table/Table";
+import ExpenseList from "../expense-list/ExpenseList";
 interface FormData {
   description: string;
   amount: number;
@@ -11,20 +12,29 @@ interface FormData {
 
 const ExpenseForm = () => {
   const CATEGORY = ["", "Grocery", "Utilities", "Entertainment"];
+  const INITIAL_EXPENSES = [
+    { id: 1, description: "Milk", amount: 10, category: "Grocery" },
+    { id: 2, description: "Orange", amount: 20, category: "Grocery" },
+    { id: 3, description: "Milk", amount: 10, category: "Grocery" },
+    { id: 4, description: "Milk", amount: 10, category: "Grocery" },
+    { id: 5, description: "Milk", amount: 10, category: "Grocery" },
+  ];
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  const [expense, setExpenses] = useState<FormData[]>([]);
+  const [expenses, setExpenses] = useState(INITIAL_EXPENSES);
 
-  const onSubmit = (data: FormData) => {
-    setExpenses([...expense, data]);
-  };
+  // const onSubmit = (data: FormData) => {
+  //   setExpenses([...expense, data]);
+  // };
 
   return (
     <div className="container">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+      // onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="mb-3">
           <Input
             type="text"
@@ -70,7 +80,10 @@ const ExpenseForm = () => {
           </button>
         </div>
       </form>
-      <Table listOfItems={expense} />
+      <ExpenseList
+        expenses={expenses}
+        onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
+      />
     </div>
   );
 };
