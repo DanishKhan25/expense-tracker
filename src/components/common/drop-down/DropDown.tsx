@@ -2,7 +2,7 @@ interface props {
   name: string;
   label: string;
   id: string;
-  list: string[];
+  list: [];
   onChange: object;
 }
 const DropDown = ({ name, id, list, label, onChange }: props) => {

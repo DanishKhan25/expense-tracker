@@ -4,21 +4,14 @@ import Input from "../common/input/Input";
 import { useState } from "react";
 import ExpenseList from "../expense-list/ExpenseList";
 import ExpenseFilter from "../expense-filter/ExpenseFilter";
+import { CATEGORIES, INITIAL_EXPENSES } from "../../utils/typography";
 interface FormData {
   description: string;
   amount: number;
   category: string;
 }
 
-export const CATEGORIES = ["Groceries", "Utilities", "Entertainment"];
 const ExpenseFormComponent = () => {
-  const INITIAL_EXPENSES = [
-    { id: 1, description: "Milk", amount: 10, category: "Groceries" },
-    { id: 2, description: "Orange", amount: 20, category: "Utilities" },
-    { id: 3, description: "Milk", amount: 10, category: "Groceries" },
-    { id: 4, description: "Milk", amount: 10, category: "Utilities" },
-    { id: 5, description: "Milk", amount: 10, category: "Entertainment" },
-  ];
   const {
     register,
     handleSubmit,

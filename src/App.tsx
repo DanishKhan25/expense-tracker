@@ -2,15 +2,9 @@ import { useState } from "react";
 import ExpenseFilter from "./components/expense-filter/ExpenseFilter";
 import ExpenseForm from "./components/expense-form/ExpenseForm";
 import ExpenseList from "./components/expense-list/ExpenseList";
+import { INITIAL_EXPENSES } from "./utils/typography";
+import { CATEGORIES } from "./utils/typography";
 
-export const CATEGORIES = ["Groceries", "Utilities", "Entertainment"];
-export const INITIAL_EXPENSES = [
-  { id: 1, description: "Milk", amount: 10, category: "Groceries" },
-  { id: 2, description: "Orange", amount: 20, category: "Utilities" },
-  { id: 3, description: "Milk", amount: 10, category: "Groceries" },
-  { id: 4, description: "Milk", amount: 10, category: "Utilities" },
-  { id: 5, description: "Milk", amount: 10, category: "Entertainment" },
-];
 const App = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [expenses, setExpenses] = useState(INITIAL_EXPENSES);

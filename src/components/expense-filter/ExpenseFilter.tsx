@@ -1,4 +1,4 @@
-import { CATEGORIES as CATEGORIES } from "../form/ExpenseFormComponent";
+import { CATEGORIES } from "../../utils/typography";
 
 interface Props {
   onSelectCategory: (category: string) => void;
