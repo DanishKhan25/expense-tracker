@@ -3,7 +3,6 @@ import ExpenseFilter from "./components/expense-filter/ExpenseFilter";
 import ExpenseForm from "./components/expense-form/ExpenseForm";
 import ExpenseList from "./components/expense-list/ExpenseList";
 import { INITIAL_EXPENSES } from "./utils/typography";
-import { CATEGORIES } from "./utils/typography";
 
 const App = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
